@@ -21,12 +21,13 @@
       padding: 40px 20px;
     }
 
-    .welcome {
-      background: rgba(255,255,255,0.9);
-      padding: 35px 20px;
+    .welcome,
+    .section {
+      background: rgba(255,255,255,0.92);
       border-radius: 30px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      margin-bottom: 35px;
+      padding: 30px 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
     }
 
     h1 {
@@ -56,20 +57,8 @@
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.85;
-    }
-
     .green-btn {
       background: #91aa87;
-    }
-
-    .section {
-      background: white;
-      border-radius: 25px;
-      padding: 25px 20px;
-      margin-top: 25px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
 
     .post {
@@ -92,31 +81,6 @@
       background: #e9f1e5;
     }
 
-    input, textarea {
-      width: 90%;
-      box-sizing: border-box;
-      border: 1px solid #ddd;
-      border-radius: 15px;
-      padding: 14px;
-      margin: 8px 0;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-    }
-
-    textarea {
-      height: 120px;
-      resize: none;
-    }
-
-    .comment {
-      background: #fafafa;
-      border-radius: 15px;
-      padding: 12px;
-      margin-top: 12px;
-      text-align: right;
-    }
-
     .flower {
       font-size: 25px;
       margin-bottom: 10px;
@@ -124,6 +88,10 @@
 
     .hidden {
       display: none;
+    }
+
+    .giscus {
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -134,6 +102,7 @@
 
     <!-- صفحه اصلی -->
     <div class="welcome">
+
       <div class="flower">🌷🌿🦋</div>
 
       <h1>سینای من، خوش اومدی به سایتمون 🤍</h1>
@@ -150,6 +119,7 @@
       <button class="green-btn" onclick="showPoll()">
         نظرسنجی 💌
       </button>
+
     </div>
 
 
@@ -160,6 +130,7 @@
 
       <div class="post">
         <h3>اولین مطلب 🤍</h3>
+
         <p>
           اینجا می‌تونیم حرف‌هامون، اتفاقاتمون و چیزهایی که
           دوست داریم درباره‌شون صحبت کنیم رو بنویسیم.
@@ -168,6 +139,7 @@
 
       <div class="post">
         <h3>یه جای امن برای حرف زدن 🌿</h3>
+
         <p>
           هر چیزی که دوست داری درباره‌ش صحبت کنی،
           می‌تونه اینجا نوشته بشه.
@@ -182,7 +154,9 @@
 
       <h2>نظرت چیه؟ 💌</h2>
 
-      <p>امروز بیشتر دوست داری درباره چی حرف بزنیم؟</p>
+      <p>
+        امروز بیشتر دوست داری درباره چی حرف بزنیم؟
+      </p>
 
       <div class="poll-option" onclick="vote('حرف و مشکلات')">
         💬 حرف و مشکلات
@@ -201,29 +175,28 @@
     </div>
 
 
-    <!-- کامنت -->
+    <!-- کامنت‌های واقعی -->
     <div class="section">
 
-      <h2>نظرتو برام بنویس 💌</h2>
+      <h2>نظراتمون 💌</h2>
 
-      <input
-        type="text"
-        id="name"
-        placeholder="اسمت رو بنویس..."
-      >
+      <div class="giscus"></div>
 
-      <textarea
-        id="commentText"
-        placeholder="اینجا برام بنویس..."
-      ></textarea>
-
-      <br>
-
-      <button onclick="addComment()">
-        ارسال نظر 🌷
-      </button>
-
-      <div id="comments"></div>
+      <script src="https://giscus.app/client.js"
+              data-repo="nazaninlotfi1384-jpg/Foreversinazi-"
+              data-repo-id="R_kgDOUqR4XQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOUqR4Xc4DGW19"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="fa"
+              crossorigin="anonymous"
+              async>
+      </script>
 
     </div>
 
@@ -233,6 +206,7 @@
   <script>
 
     function showPosts() {
+
       document.getElementById("posts").classList.remove("hidden");
 
       document.getElementById("poll").classList.add("hidden");
@@ -240,10 +214,12 @@
       document.getElementById("posts").scrollIntoView({
         behavior: "smooth"
       });
+
     }
 
 
     function showPoll() {
+
       document.getElementById("poll").classList.remove("hidden");
 
       document.getElementById("posts").classList.add("hidden");
@@ -251,37 +227,15 @@
       document.getElementById("poll").scrollIntoView({
         behavior: "smooth"
       });
+
     }
 
 
     function vote(answer) {
+
       document.getElementById("result").innerText =
         "رأی شما ثبت شد: " + answer + " 🤍";
-    }
 
-
-    function addComment() {
-
-      let name = document.getElementById("name").value;
-      let text = document.getElementById("commentText").value;
-
-      if (name.trim() === "" || text.trim() === "") {
-        alert("لطفاً اسم و نظر خودت رو بنویس 🌷");
-        return;
-      }
-
-      let comment = document.createElement("div");
-
-      comment.className = "comment";
-
-      comment.innerHTML =
-        "<strong>" + name + "</strong><br>" +
-        text;
-
-      document.getElementById("comments").appendChild(comment);
-
-      document.getElementById("name").value = "";
-      document.getElementById("commentText").value = "";
     }
 
   </script>
